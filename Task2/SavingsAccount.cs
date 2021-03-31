@@ -2,28 +2,49 @@ namespace Task2
 {
     public class SavingsAccount
     {
-        private double savingsBalance;
-        private static double annualIntRate =0.04;
+        private decimal savingsBalance;
+        // private static float annualIntRate;
 
 
-        public SavingsAccount(double savings)
+        public SavingsAccount(decimal initialBalance, float interestRate = 0.04F)
         {
-            SavingsBalance = savings;
+            SavingsBalance = initialBalance;
+            AnnualIntRate = interestRate;
             
         }
-        public double SavingsBalance
+        private static float annualIntRate;
+        private static float AnnualIntRate
         {
-            get { return savingsBalance; }
-            set { savingsBalance = value + CalculateMonthlyInterest(value); }
+            get { return annualIntRate; }
+            set { 
+                    if(value > 0)
+                    {
+                    annualIntRate = value; 
+                    }
+                }
         }
         
-        private double CalculateMonthlyInterest(double value){
-            return value * (annualIntRate/12);
+        public decimal SavingsBalance
+        {
+            get { return savingsBalance; }
+            set { 
+                if(value > 0){
+                savingsBalance = value; 
+                }
+                }
+        }
+        
+        public void CalculateMonthlyInterest(){
+            decimal interest = (SavingsBalance * (decimal)(annualIntRate)) /12;
+            SavingsBalance += interest;
         }
 
-        public static void ModifyInterestRate(double rate){
-                annualIntRate =rate/100;
+        public static void ModifyInterestRate(float newIntRate){
+            if(newIntRate > 0){
+                annualIntRate =newIntRate;
+            }
         }
+
         public override string ToString()
         {
             // return base.ToString();

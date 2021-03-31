@@ -6,15 +6,27 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            SavingsAccount saver1 = new SavingsAccount(2000);
-            SavingsAccount saver2 = new SavingsAccount(3000);
+            // var saver1 = new SavingsAccount();
 
-            Console.WriteLine(saver1);
-            Console.WriteLine(saver2);
+            SavingsAccount saver1 = new SavingsAccount(2000M);
+            SavingsAccount saver2 = new SavingsAccount(3000M);
 
-            SavingsAccount.ModifyInterestRate(5);
-            saver1.SavingsBalance = 2000;
-            saver2.SavingsBalance = 3000;
+
+            saver1.CalculateMonthlyInterest();
+            saver2.CalculateMonthlyInterest();
+
+            Console.WriteLine($"saver1 savings balance is {saver1.SavingsBalance:C}");
+            Console.WriteLine($"saver2 savings balance is {saver2.SavingsBalance:C}");
+
+            SavingsAccount.ModifyInterestRate(0.05F);
+
+            saver1.CalculateMonthlyInterest();
+            saver2.CalculateMonthlyInterest();
+
+            Console.WriteLine("\nNew balances after modifying annual interst rate is 5%");
+
+            Console.WriteLine($"saver1 savings balance is {saver1.SavingsBalance:C}");
+            Console.WriteLine($"saver2 savings balance is {saver2.SavingsBalance:C}");
         }
     }
 }
